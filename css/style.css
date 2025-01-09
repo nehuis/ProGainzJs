@@ -15,6 +15,7 @@ body{
 }
 #widget{
     color: black;
+    font-family: fantasy;
 }
 .card{
     background-color: greenyellow;
