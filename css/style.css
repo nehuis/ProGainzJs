@@ -23,6 +23,12 @@ body{
     height: 500px;
     font-family: fantasy;
 }
+.cart-card{
+    height: auto;
+    background-color: greenyellow;
+    font-family: fantasy;
+    width: auto;
+}
 .card-img-top{
     width: 250px;
     height: 350px;
@@ -95,4 +101,12 @@ footer i{
     grid-template-rows: repeat(1, 1fr);
     justify-items: center;
     gap: 20px;
+}
+.delete-button{
+    background-color: rgba(240, 248, 255, 0);
+    border: 0px;
+}
+.cart-body{
+    align-items: center;
+    padding: 15px;
 }

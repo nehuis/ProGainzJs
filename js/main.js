@@ -5,7 +5,9 @@ const widget = document.querySelector("#widget")
 let botonAgregar = document.querySelectorAll(".btn-outline-success")
 
 
-const mostrarProductos = () => {
+function mostrarProductos(listaProductos) {
+
+    contenedor.innerHTML = "";
 
     listaProductos.forEach(producto => {
         const div = document.createElement("div");
@@ -22,18 +24,31 @@ const mostrarProductos = () => {
 
     contenedor.appendChild(div);
     })
+
+    actualizarBotonAgregar();
 }
-mostrarProductos();
+mostrarProductos(listaProductos);
+
+function actualizarBotonAgregar() {
+    botonAgregar = document.querySelectorAll(".btn-outline-success");
+
+    botonAgregar.forEach(boton => {
+        boton.addEventListener("click", agregarAlCarrito);
+    });
+}
 
 let cart;
-const cartProductLs = JSON.parse(localStorage.getItem("productos-en-carrito"));
+
+let cartProductLs = localStorage.getItem("productos-en-carrito")
+
 if (cartProductLs) {
-    cart = cartProductLs;
+    cart = JSON.parse(cartProductLs);
+    actualizarWidget();
 } else {
     cart = [];
 }
 
-contenedor.addEventListener("click", (e) => {
+function agregarAlCarrito(e) {
     const productoId = e.target.id;
 
     const producto = listaProductos.find(producto => producto.id == productoId)
@@ -52,9 +67,9 @@ contenedor.addEventListener("click", (e) => {
     localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
 
     actualizarWidget();
-})
+}
 
-const actualizarWidget = () => {
+function actualizarWidget() {
     let newWidget = cart.reduce((acc, producto) => acc + producto.cantidad, 0);
 
     widget.innerText = newWidget;
