@@ -1,11 +1,18 @@
-const contenedor = document.getElementById("product-container")
+let listaProductos = [];
 
-const widget = document.querySelector("#widget")
+fetch("./js/stock.json")
+    .then(response => response.json())
+    .then(data => {
+        listaProductos = data;
+        mostrarProductos(listaProductos);
+    })
 
-let botonAgregar = document.querySelectorAll(".btn-outline-success")
+const contenedor = document.getElementById("product-container");
+const widget = document.querySelector("#widget");
+let botonAgregar = document.querySelectorAll(".btn-outline-success");
 
 
-function mostrarProductos(listaProductos) {
+function mostrarProductos() {
 
     contenedor.innerHTML = "";
 
@@ -27,7 +34,6 @@ function mostrarProductos(listaProductos) {
 
     actualizarBotonAgregar();
 }
-mostrarProductos(listaProductos);
 
 function actualizarBotonAgregar() {
     botonAgregar = document.querySelectorAll(".btn-outline-success");
@@ -49,6 +55,20 @@ if (cartProductLs) {
 }
 
 function agregarAlCarrito(e) {
+    Toastify({
+        text: "Producto agregado",
+        duration: 2000,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #00b09b, #96c93d)",
+          borderRadius: "2rem"
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
     const productoId = e.target.id;
 
     const producto = listaProductos.find(producto => producto.id == productoId)
