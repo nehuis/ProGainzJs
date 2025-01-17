@@ -13,7 +13,6 @@ let botonAgregar = document.querySelectorAll(".btn-outline-success");
 
 
 function mostrarProductos() {
-
     contenedor.innerHTML = "";
 
     listaProductos.forEach(producto => {
@@ -59,28 +58,24 @@ function agregarAlCarrito(e) {
         text: "Producto agregado",
         duration: 2000,
         close: true,
-        gravity: "top", // `top` or `bottom`
-        position: "right", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "top", 
+        position: "right", 
+        stopOnFocus: true, 
         style: {
-          background: "linear-gradient(to right, #00b09b, #96c93d)",
-          borderRadius: "2rem"
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            borderRadius: "2rem"
         },
-        onClick: function(){} // Callback after click
-      }).showToast();
+        onClick: function(){} 
+    }).showToast();
 
     const productoId = e.target.id;
-
     const producto = listaProductos.find(producto => producto.id == productoId)
 
     if(cart.some(producto => producto.id == productoId)) {
         const sumarProd = cart.findIndex(producto => producto.id == productoId);
-
         cart[sumarProd].cantidad++;
-
     } else {
         producto.cantidad = 1;
-
         cart.push(producto);
     }
 
@@ -91,6 +86,5 @@ function agregarAlCarrito(e) {
 
 function actualizarWidget() {
     let newWidget = cart.reduce((acc, producto) => acc + producto.cantidad, 0);
-
     widget.innerText = newWidget;
 }
